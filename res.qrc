@@ -1,0 +1,34 @@
+<RCC>
+    <qresource prefix="/">
+        <file>aniya/aniya1.png</file>
+        <file>aniya/aniya2.png</file>
+        <file>aniya/aniya3.png</file>
+        <file>aniya/aniya4.png</file>
+        <file>aniya/aniya5.png</file>
+        <file>aniya/aniya6.png</file>
+        <file>aniya/aniya7.png</file>
+        <file>aniya/aniya8.png</file>
+        <file>aniya/aniya9.png</file>
+        <file>aniya/aniya10.png</file>
+        <file>aniya/aniya11.png</file>
+        <file>aniya/aniya12.png</file>
+        <file>aniya/aniya13.png</file>
+        <file>aniya/aniya14.png</file>
+        <file>aniya/aniya15.png</file>
+        <file>aniya/aniya16.png</file>
+        <file>aniya/aniya17.png</file>
+        <file>aniya/aniya18.png</file>
+        <file>aniya/aniya19.png</file>
+        <file>aniya/aniya20.png</file>
+        <file>aniya/aniya21.png</file>
+        <file>aniya/aniya22.png</file>
+        <file>aniya/aniya23.png</file>
+        <file>aniya/aniya24.png</file>
+        <file>aniya/aniya25.png</file>
+        <file>aniya/aniya26.png</file>
+        <file>aniya/aniya27.png</file>
+        <file>aniya/aniya28.png</file>
+        <file>aniya/aniya29.png</file>
+        <file>aniya/aniya30.png</file>
+    </qresource>
+</RCC>
