@@ -7,6 +7,9 @@
 #include <QMouseEvent>
 #include <QPoint>
 #include <QMenu>
+#include <QTime>
+#include <QtGlobal>
+#include <cmath>
 
 class aniya : public QWidget
 {
@@ -17,6 +20,7 @@ public:
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
+
 public:
     int m_i_left = 1;
     int m_i_right = 30;

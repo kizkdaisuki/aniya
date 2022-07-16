@@ -3,19 +3,17 @@
 aniya::aniya(QWidget *parent) : QWidget(parent)
 {
     for(int i = 1; i <= 30; i ++)
-        {
-            QString str = QString(":/aniya/aniya%1.png").arg(i);
-            this->m_pixmap_aniya.load(str); // 先让他加载一遍
-        }
+    {
+        QString str = QString(":/aniya/aniya%1.png").arg(i);
+        this->m_pixmap_aniya.load(str); // 先让他加载一遍
+    }
         // 设置aniya
-        this->m_pixmap_aniya = this->m_pixmap_aniya.scaled(this->m_pixmap_aniya.width() / 4, this->m_pixmap_aniya.height() / 4, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-        this->setFixedSize(this->m_pixmap_aniya.width(), this->m_pixmap_aniya.height());
+        this->setFixedSize(this->m_pixmap_aniya.width() / 6, this->m_pixmap_aniya.height() / 6);
         this->m_timer = new QTimer(this);
         connect(this->m_timer, &QTimer::timeout, [=](){
             QString str = QString(":/aniya/aniya%1.png").arg(this->m_i_left ++);
             this->m_pixmap_aniya.load(str);
-            this->m_pixmap_aniya = this->m_pixmap_aniya.scaled(this->m_pixmap_aniya.width() / 4, this->m_pixmap_aniya.height() / 4, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+            this->m_pixmap_aniya = this->m_pixmap_aniya.scaled(this->m_pixmap_aniya.width() / 6, this->m_pixmap_aniya.height() / 6, Qt::KeepAspectRatio, Qt::SmoothTransformation);
             if(this->m_i_left > this->m_i_right)
                 this->m_i_left = 1;
             emit this->chageImg();
@@ -54,3 +52,4 @@ void aniya::mouseMoveEvent(QMouseEvent *event){
 void aniya::mouseReleaseEvent(QMouseEvent *event){
     this->m_b_mousedown = false;
 }
+
