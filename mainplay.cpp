@@ -5,14 +5,14 @@
 #include <QDebug>
 #include <QScreen>
 
-MainPlay::MainPlay(QWidget *parent)
+MainPlay::MainPlay(int facter, QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainPlay)
 {
     ui->setupUi(this);
     this->setWindowIcon(QIcon(":/aniya/aniya20.png"));
     this->initMoveWay(); // 初始化运动方向
-    this->m_aniya_bo = new aniya;
+    this->m_aniya_bo = new aniya(facter);
     this->m_aniya_bo->setParent(this);
     this->setFixedSize(this->m_aniya_bo->width(), this->m_aniya_bo->height());
     // 让小鸟飞起来
@@ -81,9 +81,8 @@ void MainPlay::setTransparent(){
        //设置窗口顶层
        this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);
 
-//       设置起始Y位置
-       this->m_point_realpos.setY(this->m_d_heightmax * 0.5 - this->m_aniya_bo->height());
-       this->m_point_realpos.setX(this->m_d_widthmax * 0.5 - this->m_aniya_bo->width());
+    this->m_point_realpos.setY(this->m_d_heightmax * 0.5 - this->height());
+    this->m_point_realpos.setX(this->m_d_widthmax * 0.5 - this->width());
 }
 
 int MainPlay::checkHit(QPoint q){
@@ -119,4 +118,10 @@ float MainPlay::getRandValue(float min, float max){
     double m1 = (double)(qrand() % 100) / 100;
     double retval = min + m1 * diff;
     return retval;
+}
+
+void MainPlay::setStartPosition(int w, int h){
+    //       设置起始Y位置
+           this->m_point_realpos.setY(h);
+           this->m_point_realpos.setX(w);
 }

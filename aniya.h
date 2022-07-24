@@ -10,12 +10,13 @@
 #include <QTime>
 #include <QtGlobal>
 #include <cmath>
+#include <QImage>
 
 class aniya : public QWidget
 {
     Q_OBJECT
 public:
-    explicit aniya(QWidget *parent = nullptr);
+    explicit aniya(int facter, QWidget *parent = nullptr);
     void moving();
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);

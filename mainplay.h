@@ -17,7 +17,7 @@ class MainPlay : public QWidget
     Q_OBJECT
 
 public:
-    MainPlay(QWidget *parent = nullptr);
+    MainPlay(int facter, QWidget *parent = nullptr);
     ~MainPlay();
 
     void paintEvent(QPaintEvent *event);
@@ -25,6 +25,7 @@ public:
     int checkHit(QPoint);
     void initMoveWay();
     float getRandValue(float, float);
+    void setStartPosition(int w, int h);
 public:
     aniya* m_aniya_bo = NULL;
     QTimer* m_timer;

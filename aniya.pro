@@ -17,11 +17,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     aniya.cpp \
+    creater.cpp \
     main.cpp \
     mainplay.cpp
 
 HEADERS += \
     aniya.h \
+    creater.h \
     mainplay.h
 
 FORMS += \
