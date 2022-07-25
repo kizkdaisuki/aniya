@@ -7,6 +7,7 @@
 #include <QPoint>
 #include "aniya.h"
 #include <cmath>
+#include <QCloseEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainPlay; }
@@ -36,7 +37,11 @@ public:
     const double EPS = 1e-6;
     double m_d_widthmax;
     double m_d_heightmax;
+protected:
+    void closeEvent(QCloseEvent *event);
 private:
     Ui::MainPlay *ui;
+signals:
+    void getClose();
 };
 #endif // MAINPLAY_H

@@ -21,6 +21,7 @@ public:
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
+//    void getExit();
 
 public:
     int m_i_left = 1;

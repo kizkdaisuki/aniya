@@ -53,3 +53,6 @@ void aniya::mouseReleaseEvent(QMouseEvent *event){
     this->m_b_mousedown = false;
 }
 
+
+
+

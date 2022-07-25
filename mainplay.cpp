@@ -4,6 +4,8 @@
 #include <QDesktopWidget>
 #include <QDebug>
 #include <QScreen>
+#include <QPushButton>
+#include <QMessageBox>
 
 MainPlay::MainPlay(int facter, QWidget *parent)
     : QWidget(parent)
@@ -123,5 +125,13 @@ float MainPlay::getRandValue(float min, float max){
 void MainPlay::setStartPosition(int w, int h){
     //       设置起始Y位置
            this->m_point_realpos.setY(h);
-           this->m_point_realpos.setX(w);
+    this->m_point_realpos.setX(w);
+}
+
+void MainPlay::closeEvent(QCloseEvent *event){
+    // TODO
+
+    qDebug() << "close";
+    emit this->getClose();
+    event->accept();
 }
