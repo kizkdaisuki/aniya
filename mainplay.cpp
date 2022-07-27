@@ -12,12 +12,12 @@ MainPlay::MainPlay(int facter, QWidget *parent)
     , ui(new Ui::MainPlay)
 {
     ui->setupUi(this);
+    this->setAttribute(Qt::WA_DeleteOnClose);
     this->setWindowIcon(QIcon(":/aniya/aniya20.png"));
     this->initMoveWay(); // 初始化运动方向
     this->m_aniya_bo = new aniya(facter);
     this->m_aniya_bo->setParent(this);
     this->setFixedSize(this->m_aniya_bo->width(), this->m_aniya_bo->height());
-    // 让小鸟飞起来
     this->m_aniya_bo->moving();
     connect(this->m_aniya_bo, &aniya::chageImg, [=](){
         this->update();
@@ -31,14 +31,37 @@ MainPlay::MainPlay(int facter, QWidget *parent)
     this->m_d_heightmax = desk.height();
     this->m_d_widthmax = desk.width();
     this->m_timer->start(30);
+
+
+    connect(this->m_aniya_bo, &aniya::mouseMidPress, [=](){
+//        if(!this->m_aniya_bo->m_i_mouseMidDown)
+//            this->m_point_v = this->m_point_temp;
+
+        //        else
+        //            this->m_point_temp = this->m_point_v,this->m_point_v = QPoint(0, 0);
+        this->m_d_angle = this->m_aniya_bo->m_d_angle;
+        this->m_point_v.setX(cos(this->m_d_angle) * 5.0);
+        this->m_point_v.setY(sin(this->m_d_angle) * 5.0);
+        qDebug() << "angle:" << this->m_aniya_bo->m_d_angle;
+        qDebug() << "position: " << this->m_point_realpos.x();
+    });
+
+
+
     connect(this->m_timer, &QTimer::timeout, [=](){
+
+        auto temp = this->m_point_realpos;
         if(!this->m_aniya_bo->m_b_mousedown)
-            this->m_point_realpos += this-> m_point_v;
-        int flg = this->checkHit(this->m_point_realpos);
+        {
+              temp = this->m_point_realpos + this->m_point_v;
+//            this->m_point_realpos += this-> m_point_v;
+        }
+
+        int flg = this->checkHit(temp);
         if(flg)// check 是否碰壁
         {    // this->m_point_realpos.setX(-this->width()); // 反弹
             // 改变速度方向
-
+//            this->m_b_iscrash = true;
             if(flg == 1) // 碰到顶部
             {
                 this->m_d_angle = 2 * this->m_PI - this->m_d_angle;
@@ -55,9 +78,14 @@ MainPlay::MainPlay(int facter, QWidget *parent)
                 this->m_point_v.setY(sin(this->m_d_angle) * 5.0);
             }
             this->m_point_realpos += this->m_point_v;
+            this->move(this->m_point_realpos);
+            return;
         }
+          this->m_point_realpos = temp;
+          this->move(temp);
+
 //        qDebug() << "brid pos = " << this->m_point_realpos.x();
-        this->move(this->m_point_realpos);
+
     });
 
     this->setTransparent();
@@ -90,9 +118,9 @@ void MainPlay::setTransparent(){
 int MainPlay::checkHit(QPoint q){
     double w = q.x();
     double h = q.y();
-    if(w + this->width() >= this->m_d_widthmax || w <= 0)
+    if(w + this->width() >= this->m_d_widthmax - 5 || w <= 5)
         return 2;
-    if(h + this->height() >= this->m_d_heightmax || h <= 0)
+    if(h + this->height() >= this->m_d_heightmax - 5 || h <= 5)
         return 1;
     return 0;
 }
@@ -112,9 +140,9 @@ float MainPlay::getRandValue(float min, float max){
     }
     if(min > max)
     {
-    float temp = min;
-    min = max;
-    max = temp;
+        float temp = min;
+        min = max;
+        max = temp;
     }
     double diff = fabs(max-min);
     double m1 = (double)(qrand() % 100) / 100;

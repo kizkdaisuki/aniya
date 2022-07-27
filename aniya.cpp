@@ -38,6 +38,14 @@ void aniya::mousePressEvent(QMouseEvent *event){
     //右键弹出菜单
     if(event->button() == Qt::RightButton)
         this->m_menu_exit->popup(QCursor::pos());
+    else if(event->button() == Qt::MidButton)
+    {
+        this->m_i_mouseMidDown ^= 1;
+        this->m_b_mouseMidDown = true;
+        this->m_ponit_tempPos = event->globalPos();
+        emit this->mouseMidPress();
+        qDebug() << "按下了鼠标: " << this->m_i_mouseMidDown;
+    }
     //窗口消失后的信号监听
     connect(this->m_menu_exit,&QMenu::aboutToHide,[=](){
         this->m_b_mousedown = false;
@@ -51,6 +59,16 @@ void aniya::mouseMoveEvent(QMouseEvent *event){
 
 void aniya::mouseReleaseEvent(QMouseEvent *event){
     this->m_b_mousedown = false;
+    // 当中间按下释放过后计算时间差
+    if(this->m_b_mouseMidDown)
+    {
+        int dx = event->globalPos().x() - this->m_ponit_tempPos.x();
+        int dy = event->globalPos().y() - this->m_ponit_tempPos.y();
+        qDebug() << "dx: " << dx << "dy: " << dy;
+        double angel = atan2(dy, dx);
+        this->m_d_angle = angel;
+        qDebug() << "鼠标释放了";
+    }
 }
 
 

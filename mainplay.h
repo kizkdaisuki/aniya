@@ -8,6 +8,7 @@
 #include "aniya.h"
 #include <cmath>
 #include <QCloseEvent>
+#include <QPair>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainPlay; }
@@ -30,13 +31,18 @@ public:
 public:
     aniya* m_aniya_bo = NULL;
     QTimer* m_timer;
+    QTimer* m_timer2;
     QPoint m_point_realpos;
     QPoint m_point_v; // 速度方向
+    QPoint m_point_temp; // 临时
+    QPair<double, double> m_dpair_v;
     double m_d_angle; // 角度
     const double m_PI = acos(-1.0);
     const double EPS = 1e-6;
     double m_d_widthmax;
     double m_d_heightmax;
+    int m_i_id;
+    bool m_b_iscrash = false;
 protected:
     void closeEvent(QCloseEvent *event);
 private:
